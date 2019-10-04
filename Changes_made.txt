@@ -1,0 +1,39 @@
+JOE DAVIES 17029907
+CHANGES MADE SINCE FORMATIVE SUBMISSION.
+----------------------------------------
+My Original game that I submitted for the formative submission was not very advanced
+and the only challenging bit of programming I had done by then was the converging of 
+enemies to the soldier/player in the middle. So now that it is complete I have made 
+a lot of changes since then;
+
+. An Enemy can now be removed when clicked on. It looks like a bullet is fired but there
+is not an actual bullet or a bullet class. It is just removed when clicked on, to make it 
+appear like it is being shot at.
+
+. The enemies now increase speed as the game goes on, essentially giving the game
+a level system, as the difficulty is gradually increasing.
+
+. The Player/soldier now has a health and score bar, where the health bar is decremented
+when an enemy spaceship reaches it (after not being destroyed in time). And where the score
+is incremented when the player successfully destroys an enemy spaceship.
+
+. The Player can now "die" after all of its health reaches zero.
+
+. Multiple splash screens are now in place;
+	
+	. Start game splash screen, giving the user options to either start the game or 
+	  view the rules.
+	. A "Rules/How to play" splash screen, accessable by the main start screen.
+	. A pause screen that will stop the game running until the user unpauses.
+	. A "Game Over" splash screen that will be displayed when the players health 
+	  has reached zero.
+
+. The enemies now have an animated sequence when they are moving, changing the colour of 
+  the lights on the spaceship every second.
+
+. The enemies now have a death Image/animated sequence that will be display an explosion 
+  when they are destroyed.
+
+. The user has the option to restart the game once it is over by pressing a key.
+
+. The user has the option to quit the game once it is over by pressing a key.
