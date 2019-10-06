@@ -30,8 +30,8 @@ void setup() //Main setup method, for predefined things that will not be changed
   explosion = loadImage("explosion.png"); //Loading the image into the PImage variable for the explosion animation
   explosion.resize(60,60); //Resizing the explosion image
   player_1 = new Soldier(400, 400, 0, 100.00); //Actually creating the instance of "Soldier" passing it the values that are defined in the constructor
-  health_bar = createFont("fantasy",16,true); //Loading the relevant values into the PFont created at the start 
-  start_text = createFont("Ziggurat-Black",100,true); //Loading the relevant values into the PFont created at the start
+  health_bar = loadFont("BodoniMTCondensed-48.vlw");
+  start_text = loadFont("BodoniMTCondensed-48.vlw");
 }
 
 
@@ -97,12 +97,12 @@ void draw() //Draw Method that will run 60 times a second (the FrameRate I set i
 void game_rules() //method that is called if the game stage is 5, displaying the image and text for the game rules screen
 {
   image(start_screen,0,0); //displays the image "start_screen" at coordinates 0, 0
-  textFont(health_bar,25); //sets the current text being used to "health_bar" with a size of 25
-  text("The game is endless, so aim for the\n highest score you can get!",215,180); //Following 5 lines, displays text in the coordinates listed after it 
-  text("Click on the enemies with your\n cursor to destroy them.", 210, 280); //
-  text("The enemies will gain speed as\n the game goes on so be careful!", 213, 380); //
-  text("You have 10 lives, GOOD LUCK!", 210, 480); //
-  text("Press the 'S' key to begin",240,550); //
+  textFont(health_bar,40); //sets the current text being used to "health_bar" with a size of 25
+  text("The game is endless, so aim for the highest score you can get!",(width/2)-(textWidth("The game is endless, so aim for the highest score you can get!")/2), (height/2)-(40/2)-120); //Following 5 lines, displays text in the coordinates listed after it 
+  text("Click on the enemies with your cursor to destroy them.", (width/2)-(textWidth("Click on the enemies with your cursor to destroy them.")/2), (height/2)-(40/2)-60); //
+  text("The enemies will gain speed as the game goes on so be careful!", (width/2)-(textWidth("The enemies will gain speed as the game goes on so be careful!")/2), (height/2)-(40/2)); //
+  text("You have 10 lives, GOOD LUCK!", (width/2)-(textWidth("You have 10 lives, GOOD LUCK!")/2), (height/2)-(40/2)+60); //
+  text("Press the 'S' key to begin",(width/2)-(textWidth("Press the 'S' key to begin")/2), (height)-60); //
   if(keyPressed == true) //if statement for if a key has been pressed on the keyboard
   {
     if(key == 's') //if the key pressed is the s key it will change the current game_stage back to 1, so the game will be unpaused
@@ -114,17 +114,19 @@ void game_rules() //method that is called if the game stage is 5, displaying the
 
 void game_paused() //method that will be called when the user pauses the game by pressing the 'p' key
 {
-  text("PAUSED",365,290); //displays the text telling the user it is paused. at the relevant coordinates
+  textFont(health_bar,80); 
+  text("PAUSED",(width/2)-(textWidth("PAUSED")/2), (height/2)-(40/2)); //displays the text telling the user it is paused. at the relevant coordinates
   paused = 1; //changes the paused state to 1, waiting then to be changed back to 0.
 }
 
 void start_screen() //method that is called as soon as the code is ran (as this is the start splash screen)
 {
   image(start_screen,0,0); //displays the image "start_screen" at the coordinates 0,0
+  textFont(start_text,80); //sets the current text being used to "start_text" with a size of 80
+  text("WELCOME TO THE VOID", (width/2)-(textWidth("WELCOME TO THE VOID")/2), (height/2)-(40/2)-80); //displays this text at those coordinates
   textFont(start_text,40); //sets the current text being used to "start_text" with a size of 40
-  text("WELCOME TO THE VOID", 170, 330); //displays this text at those coordinates
-  text("Press the 'S' key to begin",180,380); 
-  text("Or press the 'T' key for how to play", 110, 430);
+  text("Press the 'S' key to begin", (width/2)-(textWidth("Press the 'S' key to begin")/2), (height/2)-(40/2)+40); 
+  text("Or press the 'T' key for how to play", (width/2)-(textWidth("Or press the 'T' key for how to play")/2), (height/2)-(40/2) + 80);
   if(keyPressed == true) //if statement for if a key is pressed on the keyboard
   {
     if(key == 's') //if the key pressed is the s key, it will change the current stage of the game to 1 (the main bulk of the game)
@@ -137,13 +139,18 @@ void start_screen() //method that is called as soon as the code is ran (as this 
 void end_screen() //method that displays the end game splash screen, called when the player has ran out of health
 {
   image(start_screen,0,0); //displays the splash screen for the end screen
-  textFont(start_text,40); //sets the current text to "start_text" with size 40
   fill(255); //sets the text colour to white
-  text("Your final score was: " + player_1.score, 150, 345); //The following 5 lines displays the text written at the coordinates that are typed after them
-  text("You have lost all of your health",125,380); //
-  text("Game Over!",280,430); //
-  text("Press the 'R' key to restart", 165, 480); //
-  text("Or press the 'Q' key to quit", 165, 520); //
+
+  //The following 5 lines displays the text written at the coordinates that are typed after them
+  
+  textFont(start_text,60); 
+  text("Game Over!", (width/2)-(textWidth("Game Over!")/2), (height/2)-(40/2)-100);
+  textFont(start_text,40); 
+  text("You have lost all of your health", (width/2)-(textWidth("You have lost all of your health")/2), (height/2)-(40/2)-40); 
+  text("Your final score was: " + player_1.score, (width/2)-(textWidth("Your final score was: "+ player_1.score)/2), (height/2)-(40/2)); 
+  text("Press the 'R' key to restart", (width/2)-(textWidth("Press the 'R' key to restart")/2), (height/2)-(40/2)+80);
+  text("Or press the 'Q' key to quit", (width/2)-(textWidth("Or press the 'Q' key to quit")/2), (height/2)-(40/2)+120);
+
   if(keyPressed == true) //if statement for when a key is pressed on the keyboard
   {
     if(key == 'r') //if the key that is pressed is the r key it will run the following indented code under it, essentially where everything is being reset, so the game can reset
@@ -180,7 +187,7 @@ void display_background() //method that is ran in every draw instance for the st
 {
   image(background, 0, 0); //displays the space background at 0,0 and the moon image in the centre of the screen
   image(moon, 320, 320);
-  textFont(health_bar,20); //sets the current textFont to "health_bar" with size 20
+  textFont(health_bar,24); //sets the current textFont to "health_bar" with size 20
   fill(255); //sets the text colour to white 
   draw_HUD(); //runs the method "draw_HUD" that will display the score and health of the player
 }
@@ -198,7 +205,7 @@ void draw_HUD() //method that displays the score and health of the player on top
   rect(98,7,114*(health_percentage),11); //creates the main health bar, where the length of it depends on the health percentage float that we made previously in this method, so as the decimal decreases, so does the size of the rectangle
   fill(255); //sets the fill to white 
   text("SCORE: "+player_1.score,665,20); //displays the score, with the score variable coming after it, at coordinates 665, 20
-  text("PRESS 'P' TO PAUSE. 'O' TO UNPAUSE", 220, 790); //displays text telling the user how to pause and unpause at coordinates 220, 790  
+  text("PRESS 'P' TO TOGGLE PAUSE", (width/2)-(textWidth("PRESS 'P' TO TOGGLE PAUSE")/2), height-40); //displays text telling the user how to pause and unpause at coordinates 220, 790  
 }
 
 void draw_crosshair() //method to draw the crosshair on the mouse cursor
@@ -210,7 +217,7 @@ void draw_crosshair() //method to draw the crosshair on the mouse cursor
   rect(mouseX, mouseY, 2, +12); //
 }
 
-void mouseClicked() //method to register if the mouse has been clicked, running whenever it has been pressed
+void mouseReleased() //method to register if the mouse has been clicked, running whenever it has been pressed
 {
   stroke(220, 220, 220); //sets the line colour to a light grey
   line(player_1.x, player_1.y, mouseX, mouseY); //draws a line from the soldier to the cursor to give the impression that a bullet is being shot 
@@ -223,7 +230,14 @@ void keyPressed() //method that is not called, but just ran whenever a key is pr
   {
     if(key == 'p') //if the key pressed is 'p' it will change the game state to 4, pausing it 
     {
-      current_stage = 4;
+      if ( current_stage == 4)
+      {
+        current_stage = 1;
+      }
+      else
+      {
+        current_stage = 4;
+      }
     }
     if(key == 'o') //if the key pressed is 'o' it will change the game state back to 1, unpausing it 
     {
@@ -245,6 +259,7 @@ void is_shot() //method that is ran when the user clicks the mouse, this method 
       {                                                                                                                                   //against the x and y coordinates of each enemy in the arraylist 
         image(explosion,enemies.get(i).x,enemies.get(i).y); //displays the image "explosion" to show that the enemy has been destroyed, essentially another animation sequence
         enemies.remove(i); //removes the instance of the enemy from the arraylist if it has been clicked on 
+        i--; // When something is removed from the array, the array elements don't have gaps. Removing an item moves all elements down, therefore, we decrement the index.
         player_1.score = player_1.score + 100; //increments the players score with 100 as they have been succesful in destroying an enemy 
         if(player_1.score % 500 == 0) //if statement that will increment the speed of the enemies being spawned if the score is divisible by 500, to increase the difficulty of the game gradually 
         {
